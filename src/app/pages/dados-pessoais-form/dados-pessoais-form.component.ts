@@ -6,6 +6,7 @@ import { ButtonComponent } from '../../shared/components/button/button.component
 import { Router } from '@angular/router';
 import { Cidade, Estado, IbgeService } from '../../shared/services/ibge.service';
 import { BehaviorSubject, Observable, of, startWith, switchMap, tap } from 'rxjs';
+import { cpfValidator } from '../../shared/validators/cpf.validator';
 
 export const senhasIguaisValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const senha = control.get('senha');
@@ -48,6 +49,7 @@ export class DadosPessoaisFormComponent implements OnInit {
 
     this.dadosPessoaisForm = this.fb.group({
       nomeCompleto: ['', Validators.required],
+      cpf: ['', [Validators.required, cpfValidator]],
       estado: ['', Validators.required],
       cidade: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -100,7 +102,7 @@ export class DadosPessoaisFormComponent implements OnInit {
   onProximo(): void {
     if (this.dadosPessoaisForm.valid) {
       this.salvarDadosAtuais();
-      this.router.navigate(['/cadastro/confirmacao']);
+      this.router.navigate(['/cadastro/perfil']);
     } else {
       this.dadosPessoaisForm.markAllAsTouched();
     }

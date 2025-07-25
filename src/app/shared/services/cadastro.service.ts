@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Idioma } from '../models/idioma.interface';
 
 export interface CadastroData {
+  foto?: string | ArrayBuffer | null;
+  resumo?: string;
+  habilidadesSelecionadas?: string[];
+  idiomas?: Array<Idioma>;
+  portifolio?: string;
+  linkedin?: string;
   areaAtuacao?: string;
   nivelExperiencia?: string;
   nomeCompleto?: string;
